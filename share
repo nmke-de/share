@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# (It was originally planned to use HTTPS at a later stage. I will retry it if I find a way to make it stable.)
+# Zip file
+
+zip ~/.zip $1
+cd
+
+# Write NodeJS-server.
+
+echo "var http = require('http');" > .js
+echo "var fs = require('fs');" >> .js
+echo "http.createServer(function (req, res) {" >> .js
+echo "console.log('Someone attempts to download your file.');" >> .js
+echo "fs.readFile('./.zip', function(err, data) {" >> .js
+echo "if (err) {res.writeHead(404, {'Content-Type': 'text/html'});return res.end('404 Not Found');}" >> .js
+echo "res.writeHead(200, {'Content-Type': 'application/zip'});" >> .js
+echo "res.write(data);" >> .js
+echo "return res.end();" >> .js
+echo "});}).listen(1821);" >> .js
+echo "console.log('Server is running...');" >> .js
+
+# Execute NodeJS-server, press enter to quit
+
+node .js & read
+
+# Delete traces
+
+rm .js
+rm .zip
+pkill node
