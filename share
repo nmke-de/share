@@ -32,7 +32,7 @@ cd
 echo "var http = require('http');" > .js
 echo "var fs = require('fs');" >> .js
 echo "http.createServer(function (req, res) {" >> .js
-echo "console.log('Someone attempts to download your file.');" >> .js
+echo -E "process.stdout.write('\nSomeone attempts to download your file.');" >> .js
 echo "fs.readFile('./.zip', function(err, data) {" >> .js
 echo "if (err) {res.writeHead(404, {'Content-Type': 'text/html'});return res.end('404 Not Found');}" >> .js
 echo "res.writeHead(200, {'Content-Type': 'application/zip'});" >> .js
