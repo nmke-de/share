@@ -39,7 +39,7 @@ echo "res.writeHead(200, {'Content-Type': 'application/zip'});" >> .js
 echo "res.write(data);" >> .js
 echo "return res.end();" >> .js
 echo "});}).listen(1821);" >> .js
-echo "console.log('Server is running...');" >> .js
+echo "//console.log('Server is running...');" >> .js
 
 # Show IP and port
 
@@ -48,6 +48,7 @@ echo "Server address is $ip:$port"
 
 # Execute NodeJS-server, press enter to quit
 
+echo -n "Press enter to quit."
 node .js & read
 
 # Delete traces
