@@ -1,9 +1,30 @@
 #!/bin/bash
 
+# Iterate over args
+
+port="1821"
+ziparg="-r"
+readport=0
+while [ $# -gt 0 ]; do
+	if [ "$1" = "-p" ];then
+		readport=1
+	elif [ $readport -gt 0 ]; then
+		port="$1"
+		readport=0
+	else
+		ziparg="$ziparg $1"
+	fi
+	shift
+done
+
+if [ "$ziparg" = "-r" ];then
+	exit -1
+fi
+
 # (It was originally planned to use HTTPS at a later stage. I will retry it if I find a way to make it stable.)
 # Zip file
 
-zip ~/.zip $1
+zip ~/.zip $ziparg
 cd
 
 # Write NodeJS-server.
@@ -19,6 +40,11 @@ echo "res.write(data);" >> .js
 echo "return res.end();" >> .js
 echo "});}).listen(1821);" >> .js
 echo "console.log('Server is running...');" >> .js
+
+# Show IP and port
+
+ip=`hostname -I | cut -d' ' -f1`
+echo "Server address is $ip:$port"
 
 # Execute NodeJS-server, press enter to quit
 
