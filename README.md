@@ -10,6 +10,8 @@ usage: share [-p Port] [files...]
 
 Press Enter to quit the program.
 
+When the ip-address with the port appears, people can download the shared files.
+
 ## Install
 
 ```
