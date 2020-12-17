@@ -1,13 +1,8 @@
----
-title: share
-author: https://github.com/nmke-de
----
-
 # share
 
 Share files from your computer.
 
-# Usage
+## Usage
 
 ```
 usage: share [-p Port] [files...]
@@ -15,12 +10,12 @@ usage: share [-p Port] [files...]
 
 Press Enter to quit the program.
 
-# Install
+## Install
 
 ```
 git clone https://github.com/nmke-de/share
 sudo cp share/share /usr/bin/share
 ```
-## Dependencies
+### Dependencies
 
 NodeJS should be installed in order for share to work.
