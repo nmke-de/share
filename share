@@ -42,11 +42,11 @@ echo "});}).listen(1821);" >> .js
 echo "//console.log('Server is running...');" >> .js
 
 # Show IP and port
-os = `uname`
+os=`uname`
 ip=""
-if [ $os -eq "Darwin" ]; then
-	ip = `ifconfig | grep -oE "inet (.*?) broadcast" | grep -oE " (.*?)\.(.*?)\.(.*?)\.(.*?) "`
-elif [ $os -eq "Linux" ]; then
+if [ $os = "Darwin" ]; then
+	ip=`ifconfig | grep -oE "inet (.*?) broadcast" | grep -oE " (.*?)\.(.*?)\.(.*?)\.(.*?) " | grep -oE "([^ ]*)\.(.*?)\.(.*?)\.([^ ]*)"`
+elif [ $os = "Linux" ]; then
 	ip=`hostname -I | cut -d' ' -f1`
 fi
 echo "Server address is $ip:$port/dl.zip"
