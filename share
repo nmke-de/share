@@ -44,7 +44,7 @@ echo "//console.log('Server is running...');" >> .js
 # Show IP and port
 
 ip=`hostname -I | cut -d' ' -f1`
-echo "Server address is $ip:$port"
+echo "Server address is $ip:$port/dl.zip"
 
 # Execute NodeJS-server, press enter to quit
 
