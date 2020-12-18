@@ -45,6 +45,24 @@ fi
 zip ~/.zip $ziparg
 cd
 
+# If on MacOSX, write Python-Frontend
+
+if [ os="Darwin" ]; then
+	echo "import Tkinter,sys" > .py
+	echo "main = Tkinter.Tk()" >> .py
+	echo "main.option_add('*Font','30')"
+	echo "label = Tkinter.Label(main,text='share - server address')" >> .py
+	echo "label.pack()" >> .py
+	echo "entry = Tkinter.Entry(main,width=32)" >> .py
+	echo "entry.insert(1,sys.argv[1])" >> .py
+	echo "entry.pack()" >> .py
+	#echo "field = Tkinter.Text(main)" >> .py
+	#echo "field.insert(INSERT,sys.argv[1])" >> .py
+	#echo "field.pack()"
+	echo "main.mainloop()" >> .py
+	echo "print(sys.argv)" >> .py
+fi
+
 # Write NodeJS-server.
 
 echo "var http = require('http');" > .js
@@ -72,10 +90,17 @@ echo "Server address is $ip:$port/dl.zip"
 # Execute NodeJS-server, press enter to quit
 
 echo -n "Press enter to quit."
-$nodepath .js & read
+if [ os="Darwin" ]; then
+	$nodepath .js & python .py "$ip:$port/dl.zip"
+else
+	$nodepath .js & read
+fi
 
 # Delete traces
 
+if [ os="Darwin" ]; then
+	rm .py
+fi
 rm .js
 rm .zip
 pkill node
