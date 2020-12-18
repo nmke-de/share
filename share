@@ -2,7 +2,13 @@
 
 # Check whether node is installed
 
-check_node=`node -v | grep -o "^v"`
+os=`uname`
+nodepath="node"
+if [ os="Darwin" ]; then
+	nodepath="/usr/local/bin/node"
+fi
+
+check_node=`$nodepath -v | grep -o "^v"`
 if [ check_node="v" ]; then
 	echo "Node is installed."
 else
@@ -54,7 +60,7 @@ echo "});}).listen(1821);" >> .js
 echo "//console.log('Server is running...');" >> .js
 
 # Show IP and port
-os=`uname`
+
 ip=""
 if [ $os = "Darwin" ]; then
 	ip=`ifconfig | grep -oE "inet (.*?) broadcast" | grep -oE " (.*?)\.(.*?)\.(.*?)\.(.*?) " | grep -oE "([^ ]*)\.(.*?)\.(.*?)\.([^ ]*)"`
@@ -66,7 +72,7 @@ echo "Server address is $ip:$port/dl.zip"
 # Execute NodeJS-server, press enter to quit
 
 echo -n "Press enter to quit."
-node .js & read
+$nodepath .js & read
 
 # Delete traces
 
