@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Check whether node is installed
+
+check_node=`node -v | grep -o "^v"`
+if [ check_node="v" ]; then
+	echo "Node is installed."
+else
+	echo "Node is not installed."
+	read
+	exit -2
+fi
+
 # Iterate over args
 
 port="1821"
