@@ -42,8 +42,13 @@ echo "});}).listen(1821);" >> .js
 echo "//console.log('Server is running...');" >> .js
 
 # Show IP and port
-
-ip=`hostname -I | cut -d' ' -f1`
+os = `uname`
+ip=""
+if [ $os -eq "Darwin" ]; then
+	ip = `ifconfig | grep -oE "inet (.*?) broadcast" | grep -oE " (.*?)\.(.*?)\.(.*?)\.(.*?) "`
+elif [ $os -eq "Linux" ]; then
+	ip=`hostname -I | cut -d' ' -f1`
+fi
 echo "Server address is $ip:$port/dl.zip"
 
 # Execute NodeJS-server, press enter to quit
