@@ -4,14 +4,14 @@
 
 os=`uname`
 nodepath="node"
-if [ os="Linux" ]; then
+if [ os = "Linux" ]; then
 	nodepath="node"
-elif [ os="Darwin" ]; then
+elif [ os = "Darwin" ]; then
 	nodepath="/usr/local/bin/node"
 fi
 
 check_node=`$nodepath -v | grep -o "^v"`
-if [ check_node="v" ]; then
+if [ $check_node = "v" ]; then
 	echo "Node is installed."
 else
 	echo "Node is not installed."
@@ -49,7 +49,7 @@ cd
 
 # If on MacOSX, write Python-Frontend
 
-if [ os="Darwin" ]; then
+if [ os = "Darwin" ]; then
 	echo "import Tkinter,sys" > .py
 	echo "main = Tkinter.Tk()" >> .py
 	echo "main.option_add('*Font','30')" >> .py
@@ -92,9 +92,9 @@ echo "Server address is $ip:$port/dl.zip"
 # Execute NodeJS-server, press enter to quit
 
 echo -n "Press enter to quit."
-if [ os="Linux" ]; then
+if [ os = "Linux" ]; then
 	node .js & read
-elif [ os="Darwin" ]; then
+elif [ os = "Darwin" ]; then
 	echo "HIo"
 	$nodepath .js & python .py "$ip:$port/dl.zip"
 else
@@ -103,7 +103,7 @@ fi
 
 # Delete traces
 
-if [ os="Darwin" ]; then
+if [ os = "Darwin" ]; then
 	rm .py
 fi
 rm .js
