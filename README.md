@@ -23,18 +23,7 @@ sudo cp share/share /usr/bin/share
 
 ### For MacOSX
 
-Open Terminal.
-
-Enter `git clone https://github.com/nmke-de/share`.
-
-Close Terminal. Open Finder.
-
-Go to your home directory, and from there, to the folder named "share".
-
-Drag the file "share" (with lower case s) on "Move share on this!"
-Drag the file "Share" (with upper case S) on "Applications".
-
-You have installed share!!!
+Open Share.pkg and follow the install instructions.
 
 ### Dependencies
 
