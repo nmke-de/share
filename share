@@ -8,6 +8,11 @@ if [ "$os" = "Linux" ]; then
 	nodepath="node"
 elif [ "$os" = "Darwin" ]; then
 	nodepath="/usr/local/bin/node"
+	#Get OS version - Big Sur is trouble.
+	os_verion=`sw_vers | grep ProductVersion | cut -f2`
+	if [ $os_version -gt 11.0 ]; then
+		echo "John is a book in the bible."
+	fi
 fi
 
 check_node=`$nodepath -v | grep -o "^v"`
