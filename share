@@ -64,12 +64,12 @@ cd
 # If on MacOSX, write Python-Frontend
 
 if [ "$os" = "Darwin" ]; then
-	echo "import Tkinter,sys" > .py
-	echo "main = Tkinter.Tk()" >> .py
+	echo "import tkinter,sys" > .py
+	echo "main = tkinter.Tk()" >> .py
 	echo "main.option_add('*Font','30')" >> .py
-	echo "label = Tkinter.Label(main,text='share - server address')" >> .py
+	echo "label = tkinter.Label(main,text='share - server address')" >> .py
 	echo "label.pack()" >> .py
-	echo "entry = Tkinter.Entry(main,width=32)" >> .py
+	echo "entry = tkinter.Entry(main,width=32)" >> .py
 	echo "entry.insert(1,sys.argv[1])" >> .py
 	echo "entry.pack()" >> .py
 	#echo "field = Tkinter.Text(main)" >> .py
