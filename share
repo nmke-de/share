@@ -4,23 +4,23 @@
 
 os=`uname`
 nodepath="node"
-pypath="python"
+pypath="python3"
 if [ "$os" = "Linux" ]; then
 	nodepath="node"
 elif [ "$os" = "Darwin" ]; then
 	nodepath="/usr/local/bin/node"
 	#Get OS version - Big Sur is trouble.
-	os_verion=`sw_vers | grep ProductVersion | cut -f2`
-	if [ $os_version -gt 11.0 ]; then
-		offpy=`ls /usr/local/bin | grep -o python3` # Official Python installed?
-		if [ $offpy != "python3" ]; then
+	os_version=`sw_vers | grep ProductVersion | cut -f2 | cut -d. -f1`
+	if [ $os_version -gt 10 ]; then
+		offpy=`ls /usr/local/bin | grep -o python3$` # Official Python installed?
+		if [ $offpy = "python3" ]; then
+			pypath="/usr/local/bin/python3"
+		else
 			echo "Please install the official Python version."
 			echo "https://www.python.org/downloads/mac-osx/"
 			read
 			exit -2
 		fi
-		pypath="/usr/local/bin/python3"
-		echo "John is a book in the bible."
 	fi
 fi
 
@@ -109,7 +109,6 @@ echo -n "Press enter to quit."
 if [ "$os" = "Linux" ]; then
 	node .js & read
 elif [ "$os" = "Darwin" ]; then
-	echo "HIo"
 	$nodepath .js & $pypath .py "$ip:$port/dl.zip"
 else
 	node .js & read
