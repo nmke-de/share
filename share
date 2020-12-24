@@ -99,7 +99,8 @@ ip=""
 if [ "$os" = "Darwin" ]; then
 	ip=`ifconfig | grep -oE "inet (.*?) broadcast" | grep -oE " (.*?)\.(.*?)\.(.*?)\.(.*?) " | grep -oE "([^ ]*)\.(.*?)\.(.*?)\.([^ ]*)"`
 elif [ "$os" = "Linux" ]; then
-	ip=`hostname -I | cut -d' ' -f1`
+	#ip=`hostname -I | cut -d' ' -f1`
+	ip=`ip address | grep -oE "inet (.*?) brd" | cut -f2 -d' ' | cut -f1 -d/`
 fi
 echo "Server address is $ip:$port/dl.zip"
 
