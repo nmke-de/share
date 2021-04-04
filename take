@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#echo $# && exit
+#test $# > 0 && exit
+[ $# -lt 1 ] && echo "Usage: $0 [server address]" && exit
+while [ $# -gt 0 ]; do
+	wget "$1/dl.zip" && unzip dl.zip && rm dl.zip
+	shift
+done
