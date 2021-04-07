@@ -27,4 +27,4 @@ Open Share.pkg and follow the install instructions.
 
 ### Dependencies
 
-NodeJS should be installed in order for share to work. On MacOSX Big Sur or higher, [this](https://www.python.org/downloads/mac-osx/) version of Python needs also be installed.
+NodeJS should be installed in order for share to work. On MacOSX Big Sur or higher, [this](https://www.python.org/downloads/mac-osx/) version of Python needs also be installed. If you want to use `take`, you will have to make sure that `wget` is installed as well.
