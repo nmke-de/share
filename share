@@ -2,6 +2,10 @@
 
 # Check whether node is installed
 
+show_help (){
+	echo "usage: share [-p Port] [files...]"
+}
+
 os=`uname`
 nodepath="node"
 pypath="python3"
@@ -45,6 +49,9 @@ while [ $# -gt 0 ]; do
 	elif [ $readport -gt 0 ]; then
 		port="$1"
 		readport=0
+	elif [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+		show_help
+		exit
 	else
 		ziparg="$ziparg $1"
 	fi
