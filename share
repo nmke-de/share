@@ -43,9 +43,11 @@ fi
 port="1821"
 ziparg="-r"
 readport=0
+portexplicit=0
 while [ $# -gt 0 ]; do
 	if [ "$1" = "-p" ];then
 		readport=1
+		portexplicit=1
 	elif [ $readport -gt 0 ]; then
 		port="$1"
 		readport=0
@@ -63,6 +65,12 @@ if [ "$ziparg" = "-r" ];then
 fi
 
 # (It was originally planned to use HTTPS at a later stage. I will retry it if I find a way to make it stable.)
+# Check whether port is used by another instance of share.
+
+while [ -f ~/.$port.zip ]; do
+	port=`echo "$port + 1" | bc`
+done
+
 # Zip file
 
 zipfilename="~/.$port.zip"
