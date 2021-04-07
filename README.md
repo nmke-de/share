@@ -4,8 +4,10 @@ Share files from your computer.
 
 ## Usage
 
+### Commandline
+
 ```
-usage: share [-p Port] [files...]
+Usage: share [-p Port] [files...]
 ```
 
 Press Enter to quit the program.
