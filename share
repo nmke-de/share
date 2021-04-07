@@ -58,7 +58,8 @@ fi
 # (It was originally planned to use HTTPS at a later stage. I will retry it if I find a way to make it stable.)
 # Zip file
 
-zip ~/.zip $ziparg
+zipfilename="~/.$port.zip"
+zip ~/.$port.zip $ziparg
 cd
 
 # If on MacOSX, write Python-Frontend
@@ -81,17 +82,17 @@ fi
 
 # Write NodeJS-server.
 
-echo "var http = require('http');" > .js
-echo "var fs = require('fs');" >> .js
-echo "http.createServer(function (req, res) {" >> .js
-echo -E "process.stdout.write('\nSomeone attempts to download your file.');" >> .js
-echo "fs.readFile('./.zip', function(err, data) {" >> .js
-echo "if (err) {res.writeHead(404, {'Content-Type': 'text/html'});return res.end('404 Not Found');}" >> .js
-echo "res.writeHead(200, {'Content-Type': 'application/zip'});" >> .js
-echo "res.write(data);" >> .js
-echo "return res.end();" >> .js
-echo "});}).listen($port);" >> .js
-echo "//console.log('Server is running...');" >> .js
+echo "var http = require('http');" > ".$port.js"
+echo "var fs = require('fs');" >> ".$port.js"
+echo "http.createServer(function (req, res) {" >> ".$port.js"
+echo -E "process.stdout.write('\nSomeone attempts to download your file.');" >> ".$port.js"
+echo "fs.readFile('./$port.zip', function(err, data) {" >> ".$port.js"
+echo "if (err) {res.writeHead(404, {'Content-Type': 'text/html'});return res.end('404 Not Found');}" >> ".$port.js"
+echo "res.writeHead(200, {'Content-Type': 'application/zip'});" >> ".$port.js"
+echo "res.write(data);" >> ".$port.js"
+echo "return res.end();" >> ".$port.js"
+echo "});}).listen($port);" >> ".$port.js"
+echo "//console.log('Server is running...');" >> ".$port.js"
 
 # Show IP and port
 
@@ -108,11 +109,11 @@ echo "Server address is $ip:$port/dl.zip"
 
 echo -n "Press enter to quit."
 if [ "$os" = "Linux" ]; then
-	node .js & read
+	node ".$port.js" & read
 elif [ "$os" = "Darwin" ]; then
-	$nodepath .js & $pypath .py "$ip:$port/dl.zip"
+	$nodepath ".$port.js" & $pypath .py "$ip:$port/dl.zip"
 else
-	node .js & read
+	node ".$port.js" & read
 fi
 
 # Delete traces
@@ -120,6 +121,6 @@ fi
 if [ "$os" = "Darwin" ]; then
 	rm .py
 fi
-rm .js
-rm .zip
+rm ".$port.js"
+rm ".$port.zip"
 pkill node
