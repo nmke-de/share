@@ -3,7 +3,7 @@
 # Check whether node is installed
 
 show_help (){
-	echo "usage: share [-p Port] [files...]"
+	echo "Usage: share [-p Port] [files...]"
 }
 
 os=`uname`
